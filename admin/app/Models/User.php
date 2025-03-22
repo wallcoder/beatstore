@@ -9,17 +9,25 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use Laravel\Sanctum\HasApiTokens;
+
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
      */
-    protected $guarded = [];
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'email',
+        'image',
+        'password',
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -44,12 +52,11 @@ class User extends Authenticatable
         ];
     }
 
-    public function cartItem(): HasMany{
-        return $this->hasMany(CartItem::class);
+    public function customerDetail(): HasOne{
+        return $this->hasOne(CustomerDetail::class);
     }
 
-    public function customerDetail(): HasOne
-    {
-        return $this->hasOne(CustomerDetail::class);
+    public function cartItem(): HasMany{
+        return $this->hasMany(CartItem::class);
     }
 }

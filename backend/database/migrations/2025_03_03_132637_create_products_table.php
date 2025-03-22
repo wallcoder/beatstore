@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('slug');
             $table->longText('description');
             $table->string('image');
+            $table->string('status');
+            $table->string('category');
             $table->timestamps();
         });
     }

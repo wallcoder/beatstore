@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('beats', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
-            $table->integer('streams');
-            $table->integer('likes');
+            $table->integer('streams')->nullable();
+            $table->integer('likes')->nullable();
             $table->float('bpm');
             $table->string('key');
             $table->string('genre');
